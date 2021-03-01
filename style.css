@@ -1,0 +1,21 @@
+
+body{
+    border: solid 2px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.table{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: solid 2px black;
+}
+
+.container{
+    display: grid;
+    border: solid 2px black;
+    margin-bottom: 5px;
+    width: 500px;
+
+}
