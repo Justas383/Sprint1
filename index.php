@@ -8,36 +8,35 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-
-<div class="table">
-<p>
-    Type
-</p>
-<p>
-    File name
-</p>
-<p>action</p>
-
 <?php
 $dirMas = scandir("C:\Program Files\Ampps\www\Sprint1");
+print_r($dirMas);
+?>
+
+<div class="table">
+    <div class="header"> <p>File name</p></div>
+    <div class="header"> <p>File type</p></div>
+    <div class="header"> <p>Action</p></div>
+
+<?php
 for($i = 0; $i < $dirMas; $i++){
     if(is_dir($dirMas[$i])){
-        print_r( '<div class="container">
+        print_r( '
         <div class="name">
-        <a href =C:\Program Files\Ampps\www\Sprint1\\' . $dirMas[$i] . '>'.  $dirMas[$i] . '</a> </div> 
-        <div class ="type"> ' . "Directory" . "<br>" . '</div>');
+        <a href =C:\Program%Files\Ampps\www\Sprint1\\' . $dirMas[$i] . '>'.  $dirMas[$i] . '</a> </div> 
+        <div class ="type"> ' . "Directory"  . '</div>' . "<button> delete </button>");
     } else if(is_file($dirMas[$i])){
-        print_r('<div class="container">
+        print_r('
         <div class="name">
         <a href =C:\Program Files\Ampps\www\Sprint1\\' . $dirMas[$i] .'>' . $dirMas[$i] . '</a> </div>
-        <div class ="type"> ' . " File" . "<br>" . '</div>' );}
+        <div class ="type"> ' . " File"  . '</div> ' .
+        "<button> delete </button>"
+    
+    );}
         else {break;}
 }
     ?>
     </div>
-
-
-    
-    </div>
+  
 </body>
 </html>

@@ -6,14 +6,22 @@ body{
     justify-content: center;
     
 }
+.header{
+    background-color: cadetblue;
+    color: whitesmoke;
+    border: solid 2px wheat;
+}
 .table{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    border: solid 2px black;
     border: solid 2px black;
 }
 
 .container{
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width:auto ;
     border: solid 2px black;
     margin-bottom: 5px;
     width: 500px;
