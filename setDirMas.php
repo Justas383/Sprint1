@@ -1,0 +1,2 @@
+<?php 
+showInDir($dirMas[$i]);

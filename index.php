@@ -10,7 +10,7 @@
 <body>
 <?php
 $dirMas = scandir('./');
-print_r($dirMas);
+print_r("Directory contents: /" . $_SERVER['REQUEST_URI']);
 ?>
 
 <table class = "table">
@@ -27,22 +27,25 @@ print_r($dirMas);
     </tr>
 
 <?php
+
 for($i = 0; $i < $dirMas; $i++){
     if($dirMas[$i] == '.' || $dirMas[$i] == '..')continue;
     if(is_dir($dirMas[$i])){
         print_r( '<tr class = "table">
-        <td><a href =./' . $dirMas[$i] . '>'.  $dirMas[$i] . '</a> </td> 
+        <td ><a method="post" href =./' . $dirMas[$i] . '>'.  $dirMas[$i] . '</a> </td> 
         <td>Directory</td><td></td></tr>' );
-    } else if(is_file($dirMas[$i])){
+    } 
+    else if(is_file($dirMas[$i])){
         print_r('
        <tr class = "table">
        <td> <a href =./' . $dirMas[$i] .'>' . $dirMas[$i] . '</a> </td>
         <td> File</td>
         <td ><button> delete </button></td></tr>'
-    
-    );}
+    );
+   }
         else {break;}
 }
+
     ?>
 
 
