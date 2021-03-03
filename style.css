@@ -11,7 +11,10 @@ body{
     color: whitesmoke;
     border: solid 2px wheat;
 }
-button{
+.bck{
+    width: 200px;
+}
+.del{
     width: 50%;}
 
 .btnContainer{

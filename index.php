@@ -9,10 +9,12 @@
 </head>
 <body>
 <?php
-$dirMas = scandir('./');
-print_r("Directory contents: /" . $_SERVER['REQUEST_URI']);
+$path = "./" . $_GET['path'];
+$pathArr = scandir($path);
+print_r("Directory contents: /" . $path );
+print("<br>");
+print_r($pathArr);
 ?>
-
 <table class = "table">
     <tr class = "table">
         <td>
@@ -25,31 +27,32 @@ print_r("Directory contents: /" . $_SERVER['REQUEST_URI']);
             Action
         </td>
     </tr>
-
 <?php
 
-for($i = 0; $i < $dirMas; $i++){
-    if($dirMas[$i] == '.' || $dirMas[$i] == '..')continue;
-    if(is_dir($dirMas[$i])){
+for($i = 1; $i < count($pathArr); $i++){
+    if($pathArr[$i] == '.' || $pathArr[$i] == '..'){
+        continue;}
+    else if(is_dir($path . $pathArr[$i])){
+      
         print_r( '<tr class = "table">
-        <td ><a href =./' . $dirMas[$i] . '>'.  $dirMas[$i] . '</a> </td> 
+        <td ><a href=?path=' . urlencode($pathArr[$i]) . '/>'.  $pathArr[$i] . '</a> </td> 
         <td>Directory</td><td></td></tr>' );
     } 
-    else if(is_file($dirMas[$i])){
+    else if(is_file($path . $pathArr[$i])){
         print_r('
        <tr class = "table">
-       <td> <a href =./' . $dirMas[$i] .'>' . $dirMas[$i] . '</a> </td>
+       <td> <a href=?path=' . urlencode($pathArr[$i]) . '/>' . $pathArr[$i] . '</a> </td>
         <td> File</td>
-        <td ><button> delete </button></td></tr>'
+        <td><button class = "del"> delete </button></td></tr>'
     );
+    
    }
         else {break;}
-}
-
+                                };
     ?>
 
 
 </table>
-  
+  <button class="bck"> Back </button>
 </body>
 </html>
