@@ -46,9 +46,9 @@ for($i = 1; $i < count($pathArr); $i++){
         <td><button class = "del"> delete </button></td></tr>'
     );
     
-   }
+    }
         else {break;}
-                                };
+     };
     ?>
 
 
