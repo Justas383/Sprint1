@@ -1,5 +1,4 @@
-![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
-![Security Status](https://img.shields.io/security-headers?label=Security&url=https%3A%2F%2Fgithub.com&style=flat-square)
+
 ![Gluten Status](https://img.shields.io/badge/Gluten-Free-green.svg)
 ![Eco Status](https://img.shields.io/badge/ECO-Friendly-green.svg)
 
@@ -9,14 +8,15 @@ Create a folder navigation app using php.
 
 This project is for educational porpuses only.
 
-Site published at :
-
 
 ## Project features
 
--   php
--   navigate back functionality
--   show files and folders with their directories 
+-   login with validation(not done)
+-   directory and file browser(still broken)
+-   back button(working but might need a different logic)
+-   delete button(not working)
+-   download and upload files(not yet working)
+-   new folder(not working)
 
 
 ## Author

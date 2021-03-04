@@ -11,6 +11,9 @@ body{
     color: whitesmoke;
     border: solid 2px wheat;
 }
+.newDir{
+    width: 200px;
+}
 .bck{
     width: 200px;
 }

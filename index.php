@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
+<body> 
 <?php 
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -19,7 +19,7 @@
             print('Vartojo slaptazodzio langelis tuscias');}
         }
       ?>
-
+    
 <form action="" method="POST">
           <label for="uName">Username:</label><br>
           <input type="text" name="uName" value="<?php if(isset($_POST['uName'])) print($_POST['uName']) ?>">
@@ -37,12 +37,12 @@
       print_r("Directory contents: /" . $path );
       print("<br>");
 
-//cia prasideda problemos, galiu ieiti vienu lygiu zemiau, bet nedaugiau, meta error. galima daryti su foreach ciklu, 
+//cia prasideda problemos, galiu ieiti tik vienu lygiu zemiau, bet nedaugiau, meta error. galima daryti su foreach ciklu, 
 //bet man norisi darysi su for ciklu, nebent tai tiesiog neimanoma.
   for($i = 1; $i < count($pathArr); $i++){
       if($pathArr[$i] == '.' || $pathArr[$i] == '..'){
           continue;}
-      else if(is_dir($path . $pathArr[$i])){//tikrinu ar tai direktorija, jei taip spausdinam apacioje esanti koda.
+      else if(is_dir($path . $pathArr[$i])){//tikrinu ar tai direktorija, jei taip - spausdinam apacioje esanti koda.
         
           print_r( '<tr class = "table">
           <td ><a href=?path=' . urlencode($pathArr[$i]) . '/>'.  $pathArr[$i] . '</a> </td> 
@@ -58,14 +58,18 @@
       );
       
       }
-         else{break;} //nutraukiu cikla kitiems atvejams, nes buvo bugas, kad eina iki begalybes. dabar lyg to nera
        };
+      
       ?>
   
   </table>
   <?php print('<button class="bck" onclick="history.go(-1);">Back</button>'); //veikia pagal istorija, gali buti bugu.
 ?>
-
+<form action="" method="POST" >
+          <input class="newDir" type="text" id="newDir" placeholder="New Folder" name="newDir" value="<?php mkdir(""); ?>">
+           <br>
+          <input class = "newDir"type="submit" value="Submit">
+      </form>
 
  
 
