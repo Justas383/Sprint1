@@ -8,51 +8,68 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<?php
-$path = "./" . $_GET['path'];
-$pathArr = scandir($path);
-print_r("Directory contents: /" . $path );
-print("<br>");
-print_r($pathArr);
-?>
-<table class = "table">
-    <tr class = "table">
-        <td>
-            File name
-        </td>
-        <td>
-            Type
-        </td>
-        <td>
-            Action
-        </td>
-    </tr>
+<?php 
+
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+          if(!isset($_POST['uName']) || empty($_POST['uName'])){
+            print('Vartotojo vardo langelis tuscias<br>');}
+
+          if(!isset($_POST['pass']) || empty($_POST['pass'])){
+            print_r($_POST['pass']);
+            print('Vartojo slaptazodzio langelis tuscias');}
+        }
+      ?>
+
+<form action="" method="POST">
+          <label for="uName">Username:</label><br>
+          <input type="text" name="uName" value="<?php if(isset($_POST['uName'])) print($_POST['uName']) ?>">
+           <br>
+          <label for="lname">Password:</label><br>
+          <input type="password" id="pass" name="pass" value="<?php if(isset($_POST['pass'])) print($_POST['pass']) ?>">
+           <br>
+          <input type="submit" value="Submit">
+      </form>
+<table>
 <?php
 
-for($i = 1; $i < count($pathArr); $i++){
-    if($pathArr[$i] == '.' || $pathArr[$i] == '..'){
-        continue;}
-    else if(is_dir($path . $pathArr[$i])){
+      $path = "./" . $_GET['path']; //gaunu direktorijos,kurioje esu pavadinima
+      $pathArr = scandir($path);//masyvas folderiu ir failu, kurie yra tame $path
+      print_r("Directory contents: /" . $path );
+      print("<br>");
+
+//cia prasideda problemos, galiu ieiti vienu lygiu zemiau, bet nedaugiau, meta error. galima daryti su foreach ciklu, 
+//bet man norisi darysi su for ciklu, nebent tai tiesiog neimanoma.
+  for($i = 1; $i < count($pathArr); $i++){
+      if($pathArr[$i] == '.' || $pathArr[$i] == '..'){
+          continue;}
+      else if(is_dir($path . $pathArr[$i])){//tikrinu ar tai direktorija, jei taip spausdinam apacioje esanti koda.
+        
+          print_r( '<tr class = "table">
+          <td ><a href=?path=' . urlencode($pathArr[$i]) . '/>'.  $pathArr[$i] . '</a> </td> 
+          <td>Directory</td><td></td></tr>' );
+      } 
+      else if(is_file($path . $pathArr[$i])){//tikrinu ar failas
+          print_r('
+         <tr class = "table">
+         <td> <a href=?path=' . urlencode($pathArr[$i]) . '/>' . $pathArr[$i] . '</a> </td>
+          <td> File</td>
+          <td><button href = '. $pathArr . 'class = "delete" action = "delete"> delete </button>
+  </td></tr>'
+      );
       
-        print_r( '<tr class = "table">
-        <td ><a href=?path=' . urlencode($pathArr[$i]) . '/>'.  $pathArr[$i] . '</a> </td> 
-        <td>Directory</td><td></td></tr>' );
-    } 
-    else if(is_file($path . $pathArr[$i])){
-        print_r('
-       <tr class = "table">
-       <td> <a href=?path=' . urlencode($pathArr[$i]) . '/>' . $pathArr[$i] . '</a> </td>
-        <td> File</td>
-        <td><button class = "del"> delete </button></td></tr>'
-    );
-    
-    }
-        else {break;}
-     };
-    ?>
+      }
+         else{break;} //nutraukiu cikla kitiems atvejams, nes buvo bugas, kad eina iki begalybes. dabar lyg to nera
+       };
+      ?>
+  
+  </table>
+  <?php print('<button class="bck" onclick="history.go(-1);">Back</button>'); //veikia pagal istorija, gali buti bugu.
+?>
 
 
-</table>
-  <button class="bck"> Back </button>
+ 
+
+  
+
 </body>
 </html>
