@@ -9,60 +9,61 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout'){
    $_SESSION['logout_msg'] = '<p style="color: red;">You are logged out</p>';
    header('Location:/' . end(explode('\\', getcwd())) .'/' );
    exit;
- }
- //Login logika
- if (isset($_POST['login']) && !empty($_POST['uName']) && !empty($_POST['pass'])){
-   if ($_POST['uName'] == 'Justas' && $_POST['pass'] == '123') {
+}
+//Login logika
+if (isset($_POST['login']) && !empty($_POST['uName']) && !empty($_POST['pass'])){
+    if ($_POST['uName'] == 'Justas' && $_POST['pass'] == '123') {
        $_SESSION['logged_in'] = true;
        $_SESSION['timeout'] = time();
        $_SESSION['uName'] = 'Justas';
        header('Location: /' . end(explode('\\', getcwd())) . '/');
-   } else {
+   } 
+   else {
        print_r('<div class="login"style="color:red">Neteisingi prisijungimo duomenys</div>');
-   }}
+}}
    //upload logika
-   if (isset($_FILES['file'])){
+if (isset($_FILES['file'])){
     if ($_FILES['file']['name'] === ""){
         print('<div style="color: red;">No file selected to upload</div>');
-    } else {
-            $file_name = $_FILES['file']['name'];
-            $file_size = $_FILES['file']['size'];
-            $file_tmp = $_FILES['file']['tmp_name'];
-            $file_type = $_FILES['file']['type'];
-            move_uploaded_file($file_tmp, $_GET['path'] . $file_name);
-    }}
+    } 
+    else {
+        $file_name = $_FILES['file']['name'];
+        $file_size = $_FILES['file']['size'];
+        $file_tmp = $_FILES['file']['tmp_name'];
+        $file_type = $_FILES['file']['type'];
+        move_uploaded_file($file_tmp, $_GET['path'] . $file_name);
+}}
     //download logika
-    if(isset($_POST['download'])){
-        $file='./' . $_POST['download'];
-        $fileToDownloadEscaped = str_replace("&nbsp;", " ", htmlentities($file, null, 'utf-8'));
-        ob_clean();
-        ob_start();
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/pdf'); 
-        header('Content-Disposition: attachment; filename=' . basename($fileToDownloadEscaped));
-        header('Content-Transfer-Encoding: binary');
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($fileToDownloadEscaped)); 
-        flush();
-        readfile($fileToDownloadEscaped);
-        exit;
-    }
-    
-    //delete logika
-    if (isset($_POST['delete'])) {
-        unlink($_GET['path'] . $_POST['delete']);
-    }
-    //naujos direktorijos logika
-    if (isset($_POST['newDir'])) {
-        if (is_dir($_POST['newDir'])) {
-            print('<div style="color: red;">Directory with name "' . $_POST['newDir'] . '" already exists</div>');
-        } else {
-            mkdir($_GET['path'] . $_POST['newDir']);
+if(isset($_POST['download'])){
+    $file='./' . $_POST['download'];
+    $fileToDownloadEscaped = str_replace("&nbsp;", " ", htmlentities($file, null, 'utf-8'));
+    ob_clean();
+    ob_start();
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/pdf'); 
+    header('Content-Disposition: attachment; filename=' . basename($fileToDownloadEscaped));
+    header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($fileToDownloadEscaped)); 
+    flush();
+    readfile($fileToDownloadEscaped);
+    exit;
+}
+//delete logika
+if (isset($_POST['delete'])) {
+    unlink($_GET['path'] . $_POST['delete']);
+}
+//naujos direktorijos logika
+if (isset($_POST['newDir'])) {
+    if (is_dir($_POST['newDir'])) {
+        print('<div style="color: red;">Directory with name "' . $_POST['newDir'] . '" already exists</div>');
+        } 
+    else{
+        mkdir($_GET['path'] . $_POST['newDir']);
         }
-    }
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +71,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout'){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+    <title>File browser</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body> 
