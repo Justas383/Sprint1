@@ -17,16 +17,17 @@ body{
 .bck{
     width: 200px;
 }
-.del{
-    width: 50%;}
 
 .btnContainer{
     border: solid 1px black;
     display: flex;
     justify-content: center;
 }
+.upload{
+    display: inline-block;
+    float: right;
+}
 
 table, tr, td {
     border: 1px solid black;
-    
 }
