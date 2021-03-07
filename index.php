@@ -57,7 +57,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout'){
     //naujos direktorijos logika
     if (isset($_POST['newDir'])) {
         if (is_dir($_POST['newDir'])) {
-            print('<div style="color: red;">The directory with name <i><b>' . $_POST['newDir'] . '</b></i> already exists</div>');
+            print('<div style="color: red;">Directory with name "' . $_POST['newDir'] . '" already exists</div>');
         } else {
             mkdir($_GET['path'] . $_POST['newDir']);
         }
