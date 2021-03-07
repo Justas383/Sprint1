@@ -18,7 +18,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout'){
        $_SESSION['uName'] = 'Justas';
        header('Location: /' . end(explode('\\', getcwd())) . '/');
    } else {
-       print_r('<div style="color:red">Neteisingi prisijungimo duomenys</div>');
+       print_r('<div class="login"style="color:red">Neteisingi prisijungimo duomenys</div>');
    }}
    //upload logika
    if (isset($_FILES['file'])){
@@ -74,35 +74,35 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout'){
     <link rel="stylesheet" href="./style.css">
 </head>
 <body> 
-
 <?php
     if ($_SESSION['logged_in'] === true) {
     ?>
+
 <table>
     <!--FAILU NARSYKLE-->
 <?php
-    $path = './' . $_GET['path']; 
-    $pathArr = scandir($path);
-    print_r("Directory contents:" . $path );
-    print("<br>");
+$path = './' . $_GET['path']; 
+$pathArr = scandir($path);
+print_r("Directory contents:" . $path );
+print("<br>");
 
 for($i = 1; $i < count($pathArr); $i++){
     if($pathArr[$i] === '.' || $pathArr[$i] === '..' || $pathArr[$i] === '.git' || $pathArr[$i] === '.gitattributes'){continue;}
     else if(is_dir($path . '/' . $pathArr[$i])){
         if(isset($_GET['path'])){
-        print_r( '
-            <tr class = "table">
-            <td ><a href="' . $_SERVER['REQUEST_URI'] . $pathArr[$i] . '/">' . $pathArr[$i] . '</a> </td> 
-            <td>Directory</td><td></td></tr>');
-            }
-            else{
             print_r( '
-            <tr class = "table">
-            <td ><a href="' . $_SERVER['REQUEST_URI'] . '?path=' . $pathArr[$i] . '/">' . $pathArr[$i] . '</a></td> 
-            <td>Directory</td><td></td></tr>' );
+                <tr class = "table">
+                <td ><a href="' . $_SERVER['REQUEST_URI'] . $pathArr[$i] . '/">' . $pathArr[$i] . '</a> </td> 
+                <td>Directory</td><td></td></tr>');
+        }
+        else{
+            print_r( '
+                <tr class = "table">
+                <td ><a href="' . $_SERVER['REQUEST_URI'] . '?path=' . $pathArr[$i] . '/">' . $pathArr[$i] . '</a></td> 
+                <td>Directory</td><td></td></tr>' );
             }
         }
-        else if(is_file($path .'/'. $pathArr[$i])){
+    else if(is_file($path .'/'. $pathArr[$i])){
         print_r('
             <tr class = "table">
             <td> <a href="' . $_SERVER['REQUEST_URI'] . $pathArr[$i] . '/">' . $pathArr[$i] . '</a></td>
@@ -118,31 +118,36 @@ for($i = 1; $i < count($pathArr); $i++){
 ?>
   </table>
   <!-- back -->
-  <?php print('<button class="bck" onclick="history.go(-1);">Back</button>');?>
+  <?php print('<button class="bck" onclick="history.go(-1);"><---Back</button>');?>
+  <br>
   <!-- Upload -->
- <div class="upload"> <form action="" method="POST" enctype="multipart/form-data">
-                <input type="file" id="file" name="file">
-                <input type="submit" class="upload-file-btn" name="upload" value="Upload file">
-            </form>
+ <div class="upload"> 
+    <form action="" method="POST" enctype="multipart/form-data">
+        <input type="file" id="file" name="file">
+        <input type="submit" class="upload-file-btn" name="upload" value="Upload file">
+    </form>
  </div>
+ <br>
  <!-- new dir -->
- <form action="" method="POST">
-                <input type="hidden" name="path" value="<?php print($_GET['./']) ?>" /> 
-                <input placeholder="New folder" type="text" name="newDir">
-                <button type="submit">Submit</button>
-            </form>
+ <div class="newDir">
+    <form action="" method="POST">
+        <input type="hidden" name="path" value="<?php print($_GET['./']) ?>" /> 
+        <input placeholder="New folder" type="text" name="newDir">
+        <button type="submit">Submit</button>
+    </form>
+</div>         
+<br>
   <!-- log-out-->
-  <div class="logout">
-            Press to <a class="logoutBtn" href="index.php?action=logout"> logout </a>
-        </div>
-  <?php } else { ?>
+<div class="logout">
+    Press to <a class="logoutBtn" href="index.php?action=logout"> logout </a>
+</div>
+<?php } else { ?>
   <!-- login-->
-
   <div class="login">
     <form action="" method="post">
-                <input type="text" name="uName" placeholder="Justas" required autofocus></br>
-                <input type="password" name="pass" placeholder="123" required>
-                <button class="loginBtn" type="submit" name="login">Login</button>
+        <input class="log" type="text" name="uName" placeholder="Justas" required autofocus><br>
+        <input class="log" type="password" name="pass" placeholder="123" required><br>
+        <button class="loginBtn" type="submit" name="login">Login</button>
     </form>
   </div>
 <?php } ?>

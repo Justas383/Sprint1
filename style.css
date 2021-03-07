@@ -1,33 +1,37 @@
 
 body{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    background-color: cornsilk;
     border: solid 2px black;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    
 }
-.header{
-    background-color: cadetblue;
-    color: whitesmoke;
-    border: solid 2px wheat;
+.log{
+    margin-bottom: 10px;
 }
-.newDir{
-    width: 200px;
+table{
+    background-color:honeydew;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+.login{
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
 }
 .bck{
-    width: 200px;
+width: 200px;
+float: right;
 }
-
-.btnContainer{
-    border: solid 1px black;
-    display: flex;
-    justify-content: center;
+.newDir{
+    max-width: 300px;
 }
 .upload{
-    display: inline-block;
-    float: right;
+    margin:;
+    max-width: 400px;
 }
-
 table, tr, td {
-    border: 1px solid black;
+    border: 2px solid coral;
 }
