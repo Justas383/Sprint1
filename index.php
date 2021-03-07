@@ -124,7 +124,7 @@ for($i = 1; $i < count($pathArr); $i++){
  <div class="upload"> 
     <form action="" method="POST" enctype="multipart/form-data">
         <input type="file" id="file" name="file">
-        <input type="submit" class="upload-file-btn" name="upload" value="Upload file">
+        <input type="submit" class="uploadBtn" name="upload" value="Upload file">
     </form>
  </div>
  <br>
