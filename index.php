@@ -54,6 +54,14 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout'){
     if (isset($_POST['delete'])) {
         unlink($_GET['path'] . $_POST['delete']);
     }
+    //naujos direktorijos logika
+    if (isset($_POST['newDir'])) {
+        if (is_dir($_POST['newDir'])) {
+            print('<div style="color: red;">The directory with name <i><b>' . $_POST['newDir'] . '</b></i> already exists</div>');
+        } else {
+            mkdir($_GET['path'] . $_POST['newDir']);
+        }
+    }
 
 ?>
 <!DOCTYPE html>
@@ -79,7 +87,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout'){
     print("<br>");
 
 for($i = 1; $i < count($pathArr); $i++){
-    if($pathArr[$i] === '.' || $pathArr[$i] === '..'){continue;}
+    if($pathArr[$i] === '.' || $pathArr[$i] === '..' || $pathArr[$i] === '.git' || $pathArr[$i] === '.gitattributes'){continue;}
     else if(is_dir($path . '/' . $pathArr[$i])){
         if(isset($_GET['path'])){
         print_r( '
@@ -104,27 +112,37 @@ for($i = 1; $i < count($pathArr); $i++){
             </form>
             <form action="" method="POST">
             <button type="submit" class="btn" name="download" value="' . $pathArr[$i] . '">Download</button>
-            </form></td></tr>');}};
+            </form></td></tr>');}
+            else{print("Folder is empty!");}
+        };
 ?>
   </table>
-  <!-- BACK MYGTUKAS -->
+  <!-- back -->
   <?php print('<button class="bck" onclick="history.go(-1);">Back</button>');?>
+  <!-- Upload -->
  <div class="upload"> <form action="" method="POST" enctype="multipart/form-data">
                 <input type="file" id="file" name="file">
                 <input type="submit" class="upload-file-btn" name="upload" value="Upload file">
             </form>
  </div>
+ <!-- new dir -->
+ <form action="" method="POST">
+                <input type="hidden" name="path" value="<?php print($_GET['./']) ?>" /> 
+                <input placeholder="New folder" type="text" name="newDir">
+                <button type="submit">Submit</button>
+            </form>
   <!-- log-out-->
   <div class="logout">
             Press to <a class="logoutBtn" href="index.php?action=logout"> logout </a>
         </div>
   <?php } else { ?>
   <!-- login-->
+
   <div class="login">
     <form action="" method="post">
                 <input type="text" name="uName" placeholder="Justas" required autofocus></br>
                 <input type="password" name="pass" placeholder="123" required>
-                <button class="btn" type="submit" name="login">Login</button>
+                <button class="loginBtn" type="submit" name="login">Login</button>
     </form>
   </div>
 <?php } ?>
