@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body> 
-<?php //nesugalvojau kaip apjungti login forma, jog pradzioje rodytu ja, o po validacijos ieitu i browseri.
+<?php
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!isset($_POST['uName']) || empty($_POST['uName'])){
@@ -29,33 +29,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <input type="submit" value="Submit">
 </form>
 <table>
+    <!--FAILU NARSYKLE-->
 <?php
-    $path = "./" . $_GET['path']; //gaunu direktorijos,kurioje esu pavadinima
-    $pathArr = scandir($path);//masyvas folderiu ir failu, kurie yra tame $path
-    print_r("Directory contents: /" . $path );//direktorijos,kuroje ziurima adresas
+    $path = './' . $_GET['path']; 
+    $pathArr = scandir($path);
+    print_r("Directory contents:" . $path );
     print("<br>");
 
-//cia susiduriau su problema jog galiu ieiti tik vienu lygiu zemiau, bet nedaugiau, meta error. galima daryti su foreach ciklu, 
-//bet man norisi darysi su for ciklu, nebent tai tiesiog neimanoma/techniskai sudetinga (naudoti for cikla for cikle?).
-
+    //NEPAVYKO PADARYTI JOG NARSYKLE EITU GILIAU NEGU TRECIAS LYGIS
 for($i = 1; $i < count($pathArr); $i++){
-    if($pathArr[$i] == '.' || $pathArr[$i] == '..'){continue;}
-    else if(is_dir($path . $pathArr[$i])){//tikrinu ar tai direktorija, jei taip - spausdinam apacioje esanti koda.
+    if($pathArr[$i] === '.' || $pathArr[$i] === '..'){continue;}
+    else if(is_dir($path . '/' . $pathArr[$i])){
+        if(isset($_GET['path'])){
         print_r( '
             <tr class = "table">
-            <td ><a href=?path=' . urlencode($pathArr[$i]) . '/>'.  $pathArr[$i] . '</a> </td> 
-            <td>Directory</td><td></td></tr>' );}
-
-    else if(is_file($path . $pathArr[$i])){//tikrinu ar failas
+            <td ><a href=' . $_SERVER['REQUEST_URI'] . $pathArr[$i] . '/>' . $pathArr[$i] . '</a> </td> 
+            <td>Directory</td><td></td></tr>');
+            }
+            else{
+            print_r( '
+            <tr class = "table">
+            <td ><a href="' . $_SERVER['REQUEST_URI'] . '?path=' . $pathArr[$i] . '/">' . $pathArr[$i] . '</a></td> 
+            <td>Directory</td><td></td></tr>' );
+            }
+        }
+        else if(is_file($path .'/'. $pathArr[$i])){
         print_r('
             <tr class = "table">
-            <td> <a href=?path=' . urlencode($pathArr[$i]) . '/>' . $pathArr[$i] . '</a> </td>
+            <td> <a href="' . $_SERVER['REQUEST_URI'] . $pathArr[$i] . '/">' . $pathArr[$i] . '</a></td>
             <td> File</td>
-            <td><button href = '. $pathArr . 'class = "delete" action = "delete"> delete </button>
+            <td><button href = class = "delete" action = "delete"> delete </button>
             </td></tr>');}};
 ?>
   </table>
-  <?php print('<button class="bck" onclick="history.go(-1);">Back</button>'); //Back button - veikia pagal istorija, gali buti bugu.?>
+  <!-- BACK MYGTUKAS -->
+  <?php print('<button class="bck" onclick="history.go(-1);">Back</button>');?>
 <form action="" method="POST" >
     <input class="newDir" type="text" id="newDir" placeholder="New Folder" name="newDir" value="<?php mkdir(""); ?>">
     <br>
