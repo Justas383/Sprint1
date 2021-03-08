@@ -19,7 +19,7 @@ if (isset($_POST['login']) && !empty($_POST['uName']) && !empty($_POST['pass']))
        header('Location: /' . end(explode('\\', getcwd())) . '/');
    } 
    else {
-       print_r('<div class="login"style="color:red">Neteisingi prisijungimo duomenys</div>');
+       print_r('<div class="login"style="color:red">Incorrect login information</div>');
 }}
    //upload logika
 if (isset($_FILES['file'])){
