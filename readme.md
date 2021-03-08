@@ -11,12 +11,12 @@ This project is for educational porpuses only.
 
 ## Project features
 
--   login with validation(not done)
--   directory and file browser(still broken)
+-   login with validation
+-   directory and file browser
 -   back button(working but might need a different logic)
--   delete button(not working)
--   download and upload files(not yet working)
--   new folder(not working)
+-   delete button
+-   download and upload files
+-   new folder
 
 
 ## Author
